@@ -7,16 +7,20 @@ export class MainPage {
         this.product = page.locator('[data-test="inventory-item"]');
         this.productName = page.locator('[data-test="inventory-item-name"]');
         this.productPrice = page.locator('[data-test="inventory-item-price"]');
-        this.addToCartButton = page.locator('[data-test="add-to-cart-sauce-labs-backpack"]');
+        this.addToCartButton = page.locator('[data-test^="add-to-cart"]');
         this.cartBadge = page.locator('[data-test="shopping-cart-badge"]');
     }
         
-    async checkProductDisplayed() {
-        const productCount = await this.product.count();
-        if (productCount > 2) { 
-            console.log('Products are shown');
-        }
+    async addToCart(){
+        const addToCartButton = this.addToCartButton;
+        const count = await addToCartButton.count();
+        const randomProduct = Math.floor(Math.random() * count);
+        await addToCartButton.nth(randomProduct).click();
     }
+    async getProductCount() {
+        return await this.product.count();
+            }    
+    
     async getProductName() {
         return await this.productName.textContent();
     }

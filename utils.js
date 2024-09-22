@@ -4,8 +4,5 @@ export function getAuthData(){
     const rawData = fs.readFileSync(filePath);
     const jsonData = JSON.parse(rawData.toString());
 
-    return {
-        email: String(jsonData.email),
-        password: String(jsonData.password)
-    };
+    return jsonData
 }

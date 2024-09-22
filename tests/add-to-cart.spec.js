@@ -1,10 +1,10 @@
 import { test, expect } from '@playwright/test';
-import { LogIn } from '../pages/LoginPage';
+import { LoginPage } from '../pages/LoginPage';
 import { MainPage } from '../pages/MainPage';
 import { CartPage } from '../pages/CartPage';
 
 test.beforeEach(async ({ page }) => {
-    const loginPage = new LogIn(page);
+    const loginPage = new LoginPage(page);
     const mainPage = new MainPage(page);
     
     await loginPage.navigateTo();
@@ -17,7 +17,7 @@ test('Verify add to cart product', async ({ page }) => {
     const cartPage = new CartPage(page); 
      
 
-    await mainPage.addToCartButton.click();
+    await mainPage.addToCart();
     await expect(mainPage.cartBadge).toBeVisible();
     const cartProducts = await mainPage.getCartProductsCount();
     await expect(cartProducts).toBe(1);  
